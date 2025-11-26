@@ -1,4 +1,4 @@
-![Homepage Screenshot](cover.jpg)
+
 
 # 🚀 Backend Boilerplate — Express, TypeScript, Prisma 7+, PostgreSQL, Zod
 
