@@ -1,0 +1,16 @@
+
+
+enum UserRole {
+      SUPER_ADMIN
+      ADMIN
+      USER
+      GUEST
+      SUBSCRIBER
+}
+
+enum UserStatus {
+      ACTIVE
+      INACTIVE
+      BLOCKED
+      
+}
