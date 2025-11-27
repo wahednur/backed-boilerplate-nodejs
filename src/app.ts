@@ -6,6 +6,7 @@ import { StatusCodes } from "http-status-codes";
 import envVars from "./app/config/env";
 import globalErrorHandler from "./app/errors/globalErrorHandler";
 import NotFoundError from "./app/errors/notFoundError";
+import { router } from "./app/routes";
 
 const app: Application = express();
 // Security middleware
@@ -49,7 +50,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 // Application routes
-// app.use("/api/v1", routes);
+app.use("/api/v1", router);
 
 // Handle 404 routes
 app.all(/.*/, (req: Request) => {
