@@ -1,5 +1,3 @@
-
-
 # 🚀 Backend Boilerplate — Express, TypeScript, Prisma 7+, PostgreSQL, Zod
 
 A production-ready backend boilerplate built with Express, TypeScript, Prisma (Latest), Zod, PostgreSQL, JWT, and modern best practices.
