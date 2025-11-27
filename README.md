@@ -13,7 +13,7 @@ Perfect for starting new backend applications instantly without rewriting setup 
 
 - Language: TypeScript
 
-- Database ORM: Prisma (Latest v5+)
+- Database ORM: Prisma (Latest v7+)
 
 - Database: PostgreSQL
 
@@ -33,7 +33,7 @@ Perfect for starting new backend applications instantly without rewriting setup 
 
 - ⚡ Express + TypeScript
 
-- 🗄️ Prisma 5+ ORM (Latest)
+- 🗄️ Prisma 7+ ORM (Latest)
 
 - 🐘 PostgreSQL support
 

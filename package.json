@@ -8,6 +8,8 @@
     "schema": "./prisma/schema"
   },
   "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "bun --watch ./src/server.ts",
     "lint": "bunx eslint ./src"
