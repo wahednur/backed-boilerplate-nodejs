@@ -1,16 +1,19 @@
-
+enum Provider {
+  google
+  credentials
+  facebook
+}
 
 enum UserRole {
-      SUPER_ADMIN
-      ADMIN
-      USER
-      GUEST
-      SUBSCRIBER
+  SUPER_ADMIN
+  ADMIN
+  USER
+  GUEST
+  SUBSCRIBER
 }
 
 enum UserStatus {
-      ACTIVE
-      INACTIVE
-      BLOCKED
-      
+  ACTIVE
+  INACTIVE
+  BLOCKED
 }

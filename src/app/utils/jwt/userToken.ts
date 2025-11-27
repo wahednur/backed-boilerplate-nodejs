@@ -1,14 +1,15 @@
 import { JwtPayload } from "jsonwebtoken";
-import envVars from "../../config/env";
 
+import { UserStatus } from "@prisma/enums";
+import { prisma } from "app/lib/prisma";
+
+import { User } from "@prisma/client";
+import envVars from "app/config/env";
+import ApiError from "app/errors/ApiError";
 import { StatusCodes } from "http-status-codes";
-import { UserStatus } from "../../../../prisma/generated/prisma/enums";
-import ApiError from "../../errors/ApiError";
-import { prisma } from "../../lib/prisma";
-import { IUser } from "../../modules/user/user.interface";
 import { generateToken, verifyToken } from "./jwt";
 
-export const generateUserTokens = (user: Partial<IUser>) => {
+export const generateUserTokens = (user: Partial<User>) => {
   const jwtPayload = { userId: user.id, email: user.email, role: user.role };
 
   const accessToken = generateToken(
