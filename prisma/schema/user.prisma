@@ -10,18 +10,20 @@ model User {
   password   String?
   address    String?
   isVerified Boolean        @default(false)
-  auths      AuthProvider[] 
   createdAt  DateTime       @default(now())
   updateAt   DateTime       @updatedAt
-}
+  auths      AuthProvider[]
 
+  @@map("users")
+}
 
 model AuthProvider {
   id         String   @id @default(uuid())
   provider   Provider
-  providerId String   @unique
+  providerId String
   userId     String
   user       User     @relation(fields: [userId], references: [id])
 
+  @@unique([provider])
   @@map("auth_providers")
 }

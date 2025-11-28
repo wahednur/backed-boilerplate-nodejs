@@ -38,6 +38,13 @@ export const createNewAccessTokenWithRefreshToken = async (
     where: {
       email: verifiedRefreshToken.email,
     },
+    include: {
+      auths: {
+        select: {
+          provider: true,
+        },
+      },
+    },
   });
   if (!isUserExist) {
     throw new ApiError(StatusCodes.NOT_FOUND, "User does not exist");
