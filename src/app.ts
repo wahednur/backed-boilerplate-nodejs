@@ -1,3 +1,4 @@
+import router from "app/routes";
 import cors from "cors";
 import express, { Application, Request, Response } from "express";
 import rateLimit from "express-rate-limit";
@@ -6,7 +7,6 @@ import { StatusCodes } from "http-status-codes";
 import envVars from "./app/config/env";
 import globalErrorHandler from "./app/errors/globalErrorHandler";
 import NotFoundError from "./app/errors/notFoundError";
-import { router } from "./app/routes";
 
 const app: Application = express();
 // Security middleware

@@ -8,11 +8,12 @@ model User {
   phone      String?
   photo      String?
   password   String?
-  address    String?
   isVerified Boolean        @default(false)
   createdAt  DateTime       @default(now())
   updateAt   DateTime       @updatedAt
   auths      AuthProvider[]
+  addresses  Address[]
+  profiles   Profile[]
 
   @@map("users")
 }
@@ -26,4 +27,41 @@ model AuthProvider {
 
   @@unique([provider])
   @@map("auth_providers")
+}
+
+model Address {
+  id          String       @id @default(ulid())
+  line1       String
+  line2       String?
+  country     String
+  state       String
+  city        String
+  postCode    String
+  userId      String
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  isPrimary   Boolean      @default(false)
+  addressType addressType?
+  label       String?
+
+  //Indexed
+  @@unique([userId, addressType, label])
+  @@index([userId, isPrimary])
+  @@index([country, city])
+  @@map("addresses")
+}
+
+model Profile {
+  id          String    @id @default(ulid())
+  firstName   String?
+  lastName    String?
+  displayName String?
+  gender      Gender?
+  nationality String?
+  dob         DateTime?
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lastUpdate  DateTime  @default(now())
+
+  @@index([firstName, lastName])
+  @@map("profiles")
 }

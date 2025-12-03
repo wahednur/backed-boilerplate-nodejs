@@ -17,3 +17,16 @@ enum UserStatus {
   INACTIVE
   BLOCKED
 }
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum addressType {
+  HOME
+  OFFICE
+  BILLING
+  SHIPPING
+}
