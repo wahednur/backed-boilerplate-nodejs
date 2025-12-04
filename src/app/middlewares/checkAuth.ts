@@ -11,10 +11,13 @@ export const CheckAuth =
   (...authRoles: string[]) =>
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const accessToken = req.headers.authorization || req.cookies.accessToken;
+      const accessToken =
+        req.headers.authorization?.split(" ")[1] || req.cookies.accessToken;
+
       if (!accessToken) {
         throw new ApiError(StatusCodes.FORBIDDEN, "No access token received");
       }
+
       const verifiedToken = verifyToken(
         accessToken,
         envVars.JWT_SECRET
@@ -48,6 +51,7 @@ export const CheckAuth =
         );
       }
       req.user = verifiedToken;
+      next();
     } catch (err) {
       next(err);
     }

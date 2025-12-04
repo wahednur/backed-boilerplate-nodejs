@@ -1,9 +1,17 @@
 import envVars from "app/config/env";
+import { validationRequest } from "app/middlewares/validationRequest";
 import { NextFunction, Request, Response, Router } from "express";
 import passport from "passport";
+import { createUserZodSchema } from "../user/user.validation";
 import { AuthControllers } from "./auth.controller";
 
 const router = Router();
+
+router.post(
+  "/create",
+  validationRequest(createUserZodSchema),
+  AuthControllers.createUser
+);
 
 router.post("/login", AuthControllers.credentialsLogin);
 router.get(

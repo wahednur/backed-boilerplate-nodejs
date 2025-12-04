@@ -9,6 +9,23 @@ import sendResponse from "app/utils/sendResponse";
 import { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import passport from "passport";
+import { AuthServices } from "./auth.service";
+
+const createUser = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const user = await AuthServices.createUser(req.body);
+      sendResponse(res, {
+        statusCode: StatusCodes.CREATED,
+        success: true,
+        message: `"${user.email}" account created successfully`,
+        data: user,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+);
 
 const credentialsLogin = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -58,6 +75,7 @@ const googleCallbackController = catchAsync(
 );
 
 export const AuthControllers = {
+  createUser,
   credentialsLogin,
   googleCallbackController,
 };

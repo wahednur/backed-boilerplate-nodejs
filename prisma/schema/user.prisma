@@ -19,13 +19,13 @@ model User {
 }
 
 model AuthProvider {
-  id         String   @id @default(uuid())
-  provider   Provider
-  providerId String
+  id         String    @id @default(uuid())
+  provider   Provider?
+  providerId String?
   userId     String
-  user       User     @relation(fields: [userId], references: [id])
+  user       User?     @relation(fields: [userId], references: [id])
 
-  @@unique([provider])
+  @@unique([provider, providerId])
   @@map("auth_providers")
 }
 
