@@ -1,13 +1,17 @@
 import router from "app/routes";
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import express, { Application, Request, Response } from "express";
 import rateLimit from "express-rate-limit";
+import expressSession from "express-session";
 import helmet from "helmet";
 import { StatusCodes } from "http-status-codes";
+import passport from "passport";
 import envVars from "./app/config/env";
 import globalErrorHandler from "./app/errors/globalErrorHandler";
 import NotFoundError from "./app/errors/notFoundError";
 
+import "./app/config/passport";
 const app: Application = express();
 // Security middleware
 app.use(helmet());
@@ -20,6 +24,15 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
+app.use(
+  expressSession({
+    secret: envVars.EXPRESS_SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+app.use(express.urlencoded({ extended: true }));
+
 // CORS
 app.use(
   cors({
@@ -29,8 +42,14 @@ app.use(
 );
 
 // Body parser
+app.use(cookieParser());
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
+
+// Passport
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Health check route
 app.get("/health", (req: Request, res: Response) => {

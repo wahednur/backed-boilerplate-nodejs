@@ -13,6 +13,7 @@ const envSchema = z.object({
   JWT_REFRESH_SECRET: z.string().min(1),
   JWT_REFRESH_EXPIRES_IN: z.string().default("30d"),
   BCRYPT_SALT: z.coerce.number().default(10),
+  EXPRESS_SESSION_SECRET: z.string(),
 });
 
 const env = envSchema.safeParse(process.env);
