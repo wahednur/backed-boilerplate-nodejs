@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import envVars from "app/config/env";
 import ApiError from "app/errors/ApiError";
 import catchAsync from "app/utils/catchAsync";
 import { setCookie } from "app/utils/jwt/setCookie";
@@ -25,12 +27,37 @@ const credentialsLogin = catchAsync(
         statusCode: StatusCodes.OK,
         success: true,
         message: "User login successfully",
-        data: userWithoutPass,
+        data: {
+          accessToken: userToken.accessToken,
+          refreshToken: userToken.refreshToken,
+          user: userWithoutPass,
+        },
       });
     })(req, res, next);
   }
 );
 
+const googleCallbackController = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    let redirectTo = req.query.state ? (req.query.state as string) : "";
+
+    if (redirectTo.startsWith("/")) {
+      redirectTo = redirectTo.slice(1);
+    }
+    const user = req.user;
+
+    if (!user) {
+      throw new ApiError(StatusCodes.NOT_FOUND, "User not found");
+    }
+    const tokenInfo = generateUserTokens(user);
+
+    setCookie(res, tokenInfo);
+
+    res.redirect(`${envVars.FRONTEND_URL}/${redirectTo}`);
+  }
+);
+
 export const AuthControllers = {
   credentialsLogin,
+  googleCallbackController,
 };

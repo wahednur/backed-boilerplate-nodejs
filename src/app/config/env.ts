@@ -14,6 +14,10 @@ const envSchema = z.object({
   JWT_REFRESH_EXPIRES_IN: z.string().default("30d"),
   BCRYPT_SALT: z.coerce.number().default(10),
   EXPRESS_SESSION_SECRET: z.string(),
+  GOOGLE_CLIENT_SECRET: z.string(),
+  GOOGLE_CLIENT_ID: z.string(),
+  GOOGLE_CALLBACK_URL: z.string(),
+  FRONTEND_URL: z.string(),
 });
 
 const env = envSchema.safeParse(process.env);

@@ -31,6 +31,12 @@ const createUser = async (payload: createUserInput) => {
           lastName: lastName,
         },
       },
+      auths: {
+        create: {
+          provider: "credentials",
+          providerId: email,
+        },
+      },
     },
   });
   const { password: _, ...withoutPassword } = user;

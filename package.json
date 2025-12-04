@@ -14,7 +14,8 @@
     "dev": "bun --watch ./src/server.ts",
     "lint": "bunx eslint ./src",
     "migrate": "bunx prisma migrate dev",
-    "generate": "bunx prisma generate"
+    "generate": "bunx prisma generate",
+    "prisma": "bunx prisma studio"
   },
   "keywords": [],
   "author": "Abdul Wahed Nur",

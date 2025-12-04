@@ -29,6 +29,10 @@ app.use(
     secret: envVars.EXPRESS_SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      secure: envVars.NODE_ENV === "production",
+      maxAge: 1000 * 60 * 60 * 24,
+    },
   })
 );
 app.use(express.urlencoded({ extended: true }));
