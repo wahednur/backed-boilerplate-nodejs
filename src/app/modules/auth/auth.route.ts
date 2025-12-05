@@ -6,14 +6,16 @@ import { createUserZodSchema } from "../user/user.validation";
 import { AuthControllers } from "./auth.controller";
 
 const router = Router();
-
+//Create/Register user
 router.post(
   "/create",
   validationRequest(createUserZodSchema),
   AuthControllers.createUser
 );
-
+// Credentials Login
 router.post("/login", AuthControllers.credentialsLogin);
+
+// google login register
 router.get(
   "/google",
   async (req: Request, res: Response, next: NextFunction) => {
@@ -24,6 +26,7 @@ router.get(
     })(req, res, next);
   }
 );
+//Google callback
 router.get(
   "/google/callback",
   passport.authenticate("google", {
@@ -31,5 +34,14 @@ router.get(
   }),
   AuthControllers.googleCallbackController
 );
+
+// Forgot password (send email)
+// router.post("/forgot-password");
+
+//Reset password (via token)
+// router.post("/reset-password");
+
+//Change password (user already logged in)
+// router.post("/change-password");
 
 export const AuthRoutes = router;

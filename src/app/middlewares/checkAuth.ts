@@ -7,13 +7,14 @@ import ApiError from "../errors/ApiError";
 import { prisma } from "../lib/prisma";
 import { verifyToken } from "../utils/jwt/jwt";
 
-export const CheckAuth =
+export const checkAuth =
   (...authRoles: string[]) =>
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const accessToken =
-        req.headers.authorization?.split(" ")[1] || req.cookies.accessToken;
-
+        req.headers.authorization?.replace("Bearer ", "") ||
+        (req.headers.accesstoken as string) ||
+        req.cookies?.accessToken;
       if (!accessToken) {
         throw new ApiError(StatusCodes.FORBIDDEN, "No access token received");
       }

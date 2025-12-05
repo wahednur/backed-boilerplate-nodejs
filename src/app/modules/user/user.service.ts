@@ -1,48 +1,51 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Provider } from "@prisma/enums";
 import envVars from "app/config/env";
 import ApiError from "app/errors/ApiError";
 import { prisma } from "app/lib/prisma";
 import bcrypt from "bcryptjs";
 import { StatusCodes } from "http-status-codes";
-import z from "zod";
-import { createUserZodSchema } from "./user.validation";
-
-type createUserInput = z.infer<typeof createUserZodSchema>;
-const createUser = async (payload: createUserInput) => {
-  const { email, password, firstName, lastName } = payload;
-
-  const isUserExist = await prisma.user.findUnique({
+import { JwtPayload } from "jsonwebtoken";
+const setPassword = async (userId: string, payload: JwtPayload) => {
+  const user = await prisma.user.findUnique({
     where: {
-      email: email,
+      id: userId,
     },
+    include: { auths: true },
   });
-  if (isUserExist) {
-    throw new ApiError(StatusCodes.BAD_REQUEST, "User already exist");
+  if (!user) {
+    throw new ApiError(StatusCodes.NOT_FOUND, "User not found");
   }
-  const hasPass = bcrypt.hashSync(password as string, envVars.BCRYPT_SALT);
+  if (user.password) {
+    throw new ApiError(StatusCodes.BAD_REQUEST, "Password already exists");
+  }
+  const hasSocialAuth = user.auths.some(
+    (a) => a.provider && a.provider !== "credentials"
+  );
 
-  const user = await prisma.user.create({
+  if (!hasSocialAuth) {
+    throw new ApiError(
+      StatusCodes.BAD_REQUEST,
+      "Cannot set password. No social provider found."
+    );
+  }
+  const hasPass = bcrypt.hashSync(payload.newPassword, envVars.BCRYPT_SALT);
+  const updateUser = await prisma.user.update({
+    where: {
+      id: userId,
+    },
     data: {
-      email,
       password: hasPass,
-      profiles: {
-        create: {
-          firstName: firstName,
-          lastName: lastName,
-        },
-      },
       auths: {
         create: {
-          provider: "credentials",
-          providerId: email,
+          provider: Provider.credentials,
+          providerId: user?.email,
         },
       },
     },
   });
-  const { password: _, ...withoutPassword } = user;
-  return withoutPassword;
+  return updateUser;
 };
 
 export const UserServices = {
-  createUser,
+  setPassword,
 };

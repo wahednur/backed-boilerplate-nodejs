@@ -11,7 +11,6 @@ import { createUserZodSchema } from "../user/user.validation";
 type createUserInput = z.infer<typeof createUserZodSchema>;
 const createUser = async (payload: createUserInput) => {
   const { email, password, firstName, lastName } = payload;
-  console.log("Auth  Service", payload);
   const isUserExist = await prisma.user.findUnique({
     where: {
       email,
