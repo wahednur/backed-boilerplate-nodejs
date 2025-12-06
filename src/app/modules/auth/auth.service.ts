@@ -44,6 +44,15 @@ const createUser = async (payload: createUserInput) => {
   return withoutPassword;
 };
 
+const forgotPassword = async () => {
+  console.log("Forgot password");
+};
+const resetPassword = async () => {
+  console.log("Forgot password");
+};
+
 export const AuthServices = {
   createUser,
+  forgotPassword,
+  resetPassword,
 };

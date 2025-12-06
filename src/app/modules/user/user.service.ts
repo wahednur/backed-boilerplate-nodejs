@@ -2,6 +2,7 @@ import { Provider } from "@prisma/enums";
 import envVars from "app/config/env";
 import ApiError from "app/errors/ApiError";
 import { prisma } from "app/lib/prisma";
+import { sanitizeUser } from "app/utils/sanitizeUser";
 import bcrypt from "bcryptjs";
 import { StatusCodes } from "http-status-codes";
 import { JwtPayload } from "jsonwebtoken";
@@ -46,6 +47,23 @@ const setPassword = async (userId: string, payload: JwtPayload) => {
   return updateUser;
 };
 
+const getMe = async (userId: string) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+
+    include: {
+      auths: true,
+      profiles: true,
+      addresses: true,
+    },
+  });
+
+  return sanitizeUser(user);
+};
+
 export const UserServices = {
   setPassword,
+  getMe,
 };

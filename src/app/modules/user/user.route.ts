@@ -6,7 +6,7 @@ import { UserControllers } from "./user.controller";
 const router = Router();
 
 //Get current user
-// router.post("/me");
+router.get("/me", checkAuth(...Object.values(UserRole)), UserControllers.getMe);
 
 //Update user profile
 // router.post("/profile");

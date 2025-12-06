@@ -26,6 +26,25 @@ const setPassword = catchAsync(
   }
 );
 
+const getMe = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const decodedToken = req.user as JwtPayload;
+      const result = await UserServices.getMe(decodedToken.userId);
+
+      sendResponse(res, {
+        success: true,
+        statusCode: StatusCodes.CREATED,
+        message: "Password successfully set",
+        data: result,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
 export const UserControllers = {
   setPassword,
+  getMe,
 };
