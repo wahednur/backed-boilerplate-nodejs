@@ -8,6 +8,7 @@ import { generateUserTokens } from "app/utils/jwt/userToken";
 import sendResponse from "app/utils/sendResponse";
 import { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
+import jwt, { JwtPayload } from "jsonwebtoken";
 import passport from "passport";
 import { AuthServices } from "./auth.service";
 
@@ -74,15 +75,37 @@ const googleCallbackController = catchAsync(
   }
 );
 
+// Forgot password
 const forgotPassword = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
+    const { email } = req.body;
     try {
-      const result = AuthServices.forgotPassword();
+      await AuthServices.forgotPassword(email);
       sendResponse(res, {
         statusCode: StatusCodes.OK,
         success: true,
         message: "Forgot email send successfully",
-        data: result,
+        data: null,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+const resetPassword = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const id = req.query.id as string;
+      const token = req.query.token as string;
+      const { newPassword } = req.body;
+      const decodedToken = jwt.verify(token, envVars.JWT_SECRET) as JwtPayload;
+      await AuthServices.resetPassword(id, decodedToken, newPassword);
+      sendResponse(res, {
+        statusCode: StatusCodes.OK,
+        success: true,
+        message: "Password reset successfully",
+        data: null,
       });
     } catch (err) {
       next(err);
@@ -95,4 +118,5 @@ export const AuthControllers = {
   credentialsLogin,
   googleCallbackController,
   forgotPassword,
+  resetPassword,
 };

@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import { Provider } from "@prisma/enums";
 import envVars from "app/config/env";
 import ApiError from "app/errors/ApiError";
@@ -60,7 +61,7 @@ const getMe = async (userId: string) => {
     },
   });
 
-  return sanitizeUser(user);
+  return sanitizeUser(user as Prisma.UserCreateInput);
 };
 
 export const UserServices = {

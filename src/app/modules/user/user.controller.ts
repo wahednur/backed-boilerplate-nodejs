@@ -35,7 +35,7 @@ const getMe = catchAsync(
       sendResponse(res, {
         success: true,
         statusCode: StatusCodes.CREATED,
-        message: "Password successfully set",
+        message: "Retrieve user info",
         data: result,
       });
     } catch (err) {

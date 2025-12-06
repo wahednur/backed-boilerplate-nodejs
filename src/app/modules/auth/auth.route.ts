@@ -36,10 +36,10 @@ router.get(
 );
 
 // Forgot password (send email)
-// router.post("/forgot-password");
+router.post("/forgot-password", AuthControllers.forgotPassword);
 
 //Reset password (via token)
-// router.post("/reset-password");
+router.post("/reset-password", AuthControllers.resetPassword);
 
 //Change password (user already logged in)
 // router.post("/change-password");
