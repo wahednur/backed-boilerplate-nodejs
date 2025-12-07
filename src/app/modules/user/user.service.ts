@@ -64,7 +64,32 @@ const getMe = async (userId: string) => {
   return sanitizeUser(user as Prisma.UserCreateInput);
 };
 
+// Profile Update
+
+const updateProfile = async (
+  payload: Partial<Prisma.UserCreateInput>,
+  userId: string
+) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+  });
+  if (!user) {
+    throw new ApiError(StatusCodes.NOT_FOUND, "User not found");
+  }
+  const result = await prisma.user.update({
+    where: {
+      id: userId,
+    },
+    data: payload,
+  });
+
+  return result;
+};
+
 export const UserServices = {
   setPassword,
   getMe,
+  updateProfile,
 };

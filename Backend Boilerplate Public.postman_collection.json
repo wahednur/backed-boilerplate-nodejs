@@ -1,0 +1,283 @@
+{
+	"info": {
+		"_postman_id": "e24565e9-45d2-46d7-b64f-98af1a5be2ca",
+		"name": "Backend Boilerplate Public",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "9721417"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Set Password",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "accessToken",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyZDU5ZjQ5NS00ZWNjLTQ3ZDctYmVlYy04ZWU3YTE0ODM0NDgiLCJlbWFpbCI6IndhaGVkc29mdEBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc2NDk2NjUwNywiZXhwIjoxNzY1NTcxMzA3fQ.Hu7pVIWcwYCmSciKuGmJC1X6oIIig49OgeCEEgUdMus",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newPassword\": \"@WSk123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL500}}/user/set-password"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "accessToken",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4NmM0OTBlMy0zNGQxLTQ3ZjEtODY3Ny0zNWUwMjUyZTNjNTQiLCJlbWFpbCI6IndhaGVkbnVyQGdtYWlsLmNvbSIsInJvbGUiOiJVU0VSIiwiaWF0IjoxNzY1MTM2NTcxLCJleHAiOjE3NjU3NDEzNzF9.Sstw25eEpQs2aXTfu4xULwQnaxhIVNxGN1EUF_esc3c",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Abdul Wahed Nur\",\r\n    \"phone\": \"01917839303\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL500}}/user/update"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Me",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accessToken",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyZDU5ZjQ5NS00ZWNjLTQ3ZDctYmVlYy04ZWU3YTE0ODM0NDgiLCJlbWFpbCI6IndhaGVkc29mdEBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc2NDk2NjUwNywiZXhwIjoxNzY1NTcxMzA3fQ.Hu7pVIWcwYCmSciKuGmJC1X6oIIig49OgeCEEgUdMus",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newPassword\": \"@WSk123456\"\r\n}"
+						},
+						"url": "{{URL500}}/user/me"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\" : \"Abdul Wahed\",\r\n    \"lastName\" : \"Nur\",\r\n    \"email\": \"wahednur@gmail.com\",\r\n    \"password\": \"@WSk123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL500}}/auth/create"
+					},
+					"response": []
+				},
+				{
+					"name": "Credentials Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \r\n    \"email\": \"wahednur@gmail.com\",\r\n    \"password\": \"@WSk123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL500}}/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accessToken",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyZDU5ZjQ5NS00ZWNjLTQ3ZDctYmVlYy04ZWU3YTE0ODM0NDgiLCJlbWFpbCI6IndhaGVkc29mdEBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc2NDk2NjUwNywiZXhwIjoxNzY1NTcxMzA3fQ.Hu7pVIWcwYCmSciKuGmJC1X6oIIig49OgeCEEgUdMus",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"awahednur@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL500}}/auth/forgot-password"
+					},
+					"response": []
+				},
+				{
+					"name": "Rest Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accessToken",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyZDU5ZjQ5NS00ZWNjLTQ3ZDctYmVlYy04ZWU3YTE0ODM0NDgiLCJlbWFpbCI6IndhaGVkc29mdEBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc2NDk2NjUwNywiZXhwIjoxNzY1NTcxMzA3fQ.Hu7pVIWcwYCmSciKuGmJC1X6oIIig49OgeCEEgUdMus",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newPassword\": \"@WSk123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL500}}/auth/reset-password?id=d46f5f3f-a7dc-4f12-ab93-e7645d7d53ab&token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkNDZmNWYzZi1hN2RjLTRmMTItYWI5My1lNzY0NWQ3ZDUzYWIiLCJlbWFpbCI6ImF3YWhlZG51ckBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc2NTA1NzI5MCwiZXhwIjoxNzY1MDU3ODkwfQ.0ejp9fpUtJYfyDCPUlbQT9bPfDXnGSqWUzcbREz0cpE",
+							"host": [
+								"{{URL500}}"
+							],
+							"path": [
+								"auth",
+								"reset-password"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "d46f5f3f-a7dc-4f12-ab93-e7645d7d53ab"
+								},
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkNDZmNWYzZi1hN2RjLTRmMTItYWI5My1lNzY0NWQ3ZDUzYWIiLCJlbWFpbCI6ImF3YWhlZG51ckBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc2NTA1NzI5MCwiZXhwIjoxNzY1MDU3ODkwfQ.0ejp9fpUtJYfyDCPUlbQT9bPfDXnGSqWUzcbREz0cpE"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OTP",
+			"item": [
+				{
+					"name": "SendOTP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accessToken",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyZDU5ZjQ5NS00ZWNjLTQ3ZDctYmVlYy04ZWU3YTE0ODM0NDgiLCJlbWFpbCI6IndhaGVkc29mdEBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc2NDk2NjUwNywiZXhwIjoxNzY1NTcxMzA3fQ.Hu7pVIWcwYCmSciKuGmJC1X6oIIig49OgeCEEgUdMus",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"name\": \"Abdul Wahed Nur\",\r\n    \"email\": \"awahednur@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL500}}/otp/send-otp"
+					},
+					"response": []
+				},
+				{
+					"name": "Verify OTP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accessToken",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyZDU5ZjQ5NS00ZWNjLTQ3ZDctYmVlYy04ZWU3YTE0ODM0NDgiLCJlbWFpbCI6IndhaGVkc29mdEBnbWFpbC5jb20iLCJyb2xlIjoiVVNFUiIsImlhdCI6MTc2NDk2NjUwNywiZXhwIjoxNzY1NTcxMzA3fQ.Hu7pVIWcwYCmSciKuGmJC1X6oIIig49OgeCEEgUdMus",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"name\": \"Abdul Wahed Nur\",\r\n    \"email\": \"awahednur@gmail.com\",\r\n    \"otp\": \"685092\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL500}}/otp/verify-otp"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "jwt",
+		"jwt": {
+			"algorithm": "HS256",
+			"isSecretBase64Encoded": false,
+			"payload": "{}",
+			"addTokenTo": "header",
+			"headerPrefix": "Bearer",
+			"queryParamKey": "token",
+			"header": "{}"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

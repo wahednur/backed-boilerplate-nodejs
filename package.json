@@ -15,7 +15,7 @@
     "lint": "bunx eslint ./src",
     "migrate": "bunx prisma migrate dev",
     "generate": "bunx prisma generate",
-    "prisma": "bunx prisma studio"
+    "studio": "bunx prisma studio"
   },
   "keywords": [],
   "author": "Abdul Wahed Nur",

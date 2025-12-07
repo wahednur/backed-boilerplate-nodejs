@@ -15,5 +15,10 @@ router.patch(
   checkAuth(...Object.values(UserRole)),
   UserControllers.setPassword
 );
+router.patch(
+  "/update",
+  checkAuth(...Object.values(UserRole)),
+  UserControllers.updateProfile
+);
 
 export const UserRoutes = router;

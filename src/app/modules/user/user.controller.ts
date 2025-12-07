@@ -44,7 +44,30 @@ const getMe = catchAsync(
   }
 );
 
+//Update profile
+const updateProfile = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const decodedToken = req.user as JwtPayload;
+      const payload = req.body;
+      const result = await UserServices.updateProfile(
+        payload,
+        decodedToken.userId
+      );
+      sendResponse(res, {
+        success: true,
+        statusCode: StatusCodes.OK,
+        message: "Profile data updated successfully",
+        data: result,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
 export const UserControllers = {
   setPassword,
   getMe,
+  updateProfile,
 };

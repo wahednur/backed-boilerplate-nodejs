@@ -27,7 +27,9 @@ Perfect for starting new backend applications instantly without rewriting setup 
 
 - Code Quality: ESLint + TypeScript strict mode
 
-- Security: CORS, Helmet (optional)
+- Security: CORS, Helmet
+
+- Send email, OTP: Nodemailer + Redis
 
 ## ✨ Features
 
@@ -42,6 +44,8 @@ Perfect for starting new backend applications instantly without rewriting setup 
 - 🍪 HttpOnly Secure Cookies
 
 - 🧩 Zod Request Validation
+
+- ⣿ OTP verification
 
 - 🚨 Centralized Error Handling
 
@@ -79,15 +83,21 @@ Follow the folder structure and code conventions.
 ```
 server
 ├── prisma
-│   └── schema.prisma
+│   └── schema
+│       ├── enum.prisma
+│       ├── schema.prisma
+│       └── user.prisma
 ├── src
 │   ├── app
 │   │   ├── config
-│   │   │   └── env.ts
+│   │   │   ├── env.ts
+│   │   │   ├── passport.ts
+│   │   │   └── redies.config.ts
 │   │   ├── errors
 │   │   │   ├── ApiError.ts
 │   │   │   ├── error.interface.ts
 │   │   │   ├── globalErrorHandler.ts
+│   │   │   ├── handlePrismaErrors.ts
 │   │   │   ├── handleZodError.ts
 │   │   │   └── notFoundError.ts
 │   │   ├── lib
@@ -100,6 +110,10 @@ server
 │   │   │   │   ├── auth.controller.ts
 │   │   │   │   ├── auth.route.ts
 │   │   │   │   └── auth.service.ts
+│   │   │   ├── otp
+│   │   │   │   ├── otp.controller.ts
+│   │   │   │   ├── otp.routes.ts
+│   │   │   │   └── otp.service.ts
 │   │   │   └── user
 │   │   │       ├── user.controller.ts
 │   │   │       ├── user.interface.ts
@@ -113,14 +127,26 @@ server
 │   │       │   ├── jwt.ts
 │   │       │   ├── setCookie.ts
 │   │       │   └── userToken.ts
+│   │       ├── templates
+│   │       │   ├── forgetPassword.ejs
+│   │       │   ├── invoice.ejs
+│   │       │   └── otp.ejs
 │   │       ├── catchAsync.ts
+│   │       ├── generateOtp.ts
+│   │       ├── sanitizeUser.ts
+│   │       ├── sendEmail.ts
 │   │       └── sendResponse.ts
+│   ├── types
+│   │   └── express.d.ts
 │   ├── app.ts
 │   └── server.ts
 ├── .env.example
+├── .gitignore
+├── README.md
 ├── bun.lock
-├── package.json
 ├── eslint.config.mjs
+├── package-lock.json
+├── package.json
 ├── prisma.config.ts
 └── tsconfig.json
 ```
@@ -134,6 +160,24 @@ server
 ```
 require('crypto').randomBytes(64).toString('hex')
 ```
+
+**_ API Routes _**
+
+Auth Routes
+Create User: http://localhost:5000/api/v1/auth/create
+Login User: http://localhost:5000/api/v1/auth/login
+Google Login User: http://localhost:5000/api/v1/auth/google
+Forgot Password: http://localhost:5000/api/v1/auth/forgot-password
+Rest Password: http://localhost:5000/api/v1/auth/reset-password
+
+User Routes
+Set Password: http://localhost:5000/api/v1/user/set-password
+Update Profile: http://localhost:5000/api/v1/user/update
+Get Me: http://localhost:5000/api/v1/user/me
+
+OTP Routes
+Send OTP: http://localhost:5000/api/v1/otp/send-otp
+Verify OTP: http://localhost:5000/api/v1/otp/verify-otp
 
 **_ 🧩 Installation _**
 

@@ -2,8 +2,8 @@ model User {
   id         String         @id @default(uuid())
   email      String         @unique
   name       String?
-  role       UserRole       @default(GUEST)
-  status     UserStatus     @default(ACTIVE)
+  role       UserRole?      @default(GUEST)
+  status     UserStatus?    @default(ACTIVE)
   isDeleted  Boolean        @default(false)
   phone      String?
   photo      String?
