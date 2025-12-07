@@ -180,6 +180,7 @@ User Routes
 Set Password: http://localhost:5000/api/v1/user/set-password
 
 Update Profile: http://localhost:5000/api/v1/user/update
+
 Get Me: http://localhost:5000/api/v1/user/me
 
 OTP Routes
