@@ -141,6 +141,12 @@ NODE_ENV=development
 
 ```
 
+**_ Generate secret key _**
+
+```
+require('crypto').randomBytes(64).toString('hex')
+```
+
 **_ 🧩 Installation _**
 
 ```

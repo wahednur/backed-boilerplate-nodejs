@@ -1,4 +1,5 @@
 import { AuthRoutes } from "app/modules/auth/auth.route";
+import { OtpRoutes } from "app/modules/otp/otp.routes";
 import { UserRoutes } from "app/modules/user/user.route";
 import express from "express";
 
@@ -11,6 +12,10 @@ const moduleRoutes = [
   {
     path: "/auth",
     route: AuthRoutes,
+  },
+  {
+    path: "/otp",
+    route: OtpRoutes,
   },
 ];
 

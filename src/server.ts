@@ -2,6 +2,7 @@
 import { Server } from "http";
 import app from "./app";
 
+import { connectRedis } from "app/config/redies.config";
 import envVars from "./app/config/env";
 import { prisma } from "./app/lib/prisma";
 
@@ -23,7 +24,11 @@ const bootstrap = async () => {
   }
 };
 
-bootstrap();
+(async () => {
+  await connectRedis();
+  await bootstrap();
+})();
+
 // Graceful shutdown
 process.on("SIGTERM", () => {
   console.log("SIGTERM received");

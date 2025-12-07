@@ -27,9 +27,10 @@ const envSchema = z.object({
   SMTP_PASS: z.string(),
   SMTP_FROM: z.string(),
   REDIS_HOST: z.string(),
-  REDIS_PORT: z.string(),
+  REDIS_PORT: z.coerce.number(),
   REDIS_USERNAME: z.string(),
   REDIS_PASSWORD: z.string(),
+  OTP_EXPIRATION: z.coerce.number().min(2),
 });
 
 const env = envSchema.safeParse(process.env);
