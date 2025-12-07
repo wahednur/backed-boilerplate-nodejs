@@ -127,7 +127,7 @@ server
 
 **_ ⚙️ Environment Variables (.env) _**
 
-`.env.example`
+[.env.example](./.env.example)
 
 **_ Generate secret key _**
 
