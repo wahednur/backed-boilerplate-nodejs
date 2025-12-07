@@ -164,19 +164,28 @@ require('crypto').randomBytes(64).toString('hex')
 **_ API Routes _**
 
 Auth Routes
+
 Create User: http://localhost:5000/api/v1/auth/create
+
 Login User: http://localhost:5000/api/v1/auth/login
+
 Google Login User: http://localhost:5000/api/v1/auth/google
+
 Forgot Password: http://localhost:5000/api/v1/auth/forgot-password
+
 Rest Password: http://localhost:5000/api/v1/auth/reset-password
 
 User Routes
+
 Set Password: http://localhost:5000/api/v1/user/set-password
+
 Update Profile: http://localhost:5000/api/v1/user/update
 Get Me: http://localhost:5000/api/v1/user/me
 
 OTP Routes
+
 Send OTP: http://localhost:5000/api/v1/otp/send-otp
+
 Verify OTP: http://localhost:5000/api/v1/otp/verify-otp
 
 **_ 🧩 Installation _**
