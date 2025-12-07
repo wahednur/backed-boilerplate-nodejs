@@ -127,19 +127,7 @@ server
 
 **_ ⚙️ Environment Variables (.env) _**
 
-```
-DATABASE_URL="postgresql://user:password@localhost:5432/database"
-PORT=5000
-
-JWT_ACCESS_SECRET=yourAccessSecret
-JWT_REFRESH_SECRET=yourRefreshSecret
-JWT_EXPIRES_IN=1d
-JWT_REFRESH_EXPIRES_IN=7d
-
-COOKIE_SECRET=yourCookieSecret
-NODE_ENV=development
-
-```
+`.env.example`
 
 **_ Generate secret key _**
 
