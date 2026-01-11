@@ -5,6 +5,7 @@ interface IMEta {
   page: number;
   limit: number;
   total: number;
+  totalPage: number;
 }
 
 interface IApiResponse<T> {
