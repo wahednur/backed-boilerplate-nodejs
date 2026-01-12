@@ -1,8 +1,10 @@
+import { QueryBuilder } from "app/shared/query/QueryBuilder";
 import catchAsync from "app/utils/catchAsync";
 import sendResponse from "app/utils/sendResponse";
 import { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import { JwtPayload } from "jsonwebtoken";
+import { UserQueryConfig } from "./user.constant";
 import { UserServices } from "./user.service";
 
 const setPassword = catchAsync(
@@ -30,16 +32,36 @@ const getMe = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const decodedToken = req.user as JwtPayload;
+
       const result = await UserServices.getMe(decodedToken.userId);
 
       sendResponse(res, {
         success: true,
-        statusCode: StatusCodes.CREATED,
+        statusCode: StatusCodes.OK,
         message: "Retrieve user info",
         data: result,
       });
     } catch (err) {
       next(err);
+    }
+  }
+);
+
+/** Get all users */
+const getAllUsers = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const query = QueryBuilder.from(req.query, UserQueryConfig);
+      const result = await UserServices.getAllUsers(query);
+      sendResponse(res, {
+        success: true,
+        statusCode: StatusCodes.OK,
+        message: "Retrieve user info",
+        meta: result.meta,
+        data: result.data,
+      });
+    } catch (error) {
+      next(error);
     }
   }
 );
@@ -70,4 +92,5 @@ export const UserControllers = {
   setPassword,
   getMe,
   updateProfile,
+  getAllUsers,
 };

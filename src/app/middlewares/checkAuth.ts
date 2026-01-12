@@ -15,6 +15,7 @@ export const checkAuth =
         req.headers.authorization?.replace("Bearer ", "") ||
         (req.headers.accesstoken as string) ||
         req.cookies?.accessToken;
+
       if (!accessToken) {
         throw new ApiError(StatusCodes.FORBIDDEN, "No access token received");
       }

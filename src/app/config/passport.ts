@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Provider, UserRole, UserStatus } from "@prisma/enums";
 import bcrypt from "bcryptjs";
 import passport, { Profile } from "passport";

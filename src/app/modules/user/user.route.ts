@@ -8,6 +8,14 @@ const router = Router();
 //Get current user
 router.get("/me", checkAuth(...Object.values(UserRole)), UserControllers.getMe);
 
+// get all user by Admin
+
+router.get(
+  "/users",
+  checkAuth(UserRole.SUPER_ADMIN, UserRole.ADMIN),
+  UserControllers.getAllUsers
+);
+
 //Update user profile
 // router.post("/profile");
 router.patch(

@@ -115,13 +115,22 @@ server
 │   │   │   │   ├── otp.routes.ts
 │   │   │   │   └── otp.service.ts
 │   │   │   └── user
+│   │   │       ├── user.constant.ts
 │   │   │       ├── user.controller.ts
 │   │   │       ├── user.interface.ts
+│   │   │       ├── user.repository.ts
 │   │   │       ├── user.route.ts
 │   │   │       ├── user.service.ts
 │   │   │       └── user.validation.ts
 │   │   ├── routes
 │   │   │   └── index.ts
+│   │   ├── shared
+│   │   │   ├── pagination
+│   │   │   │   ├── pagination.ts
+│   │   │   │   ├── pick.ts
+│   │   │   │   └── types.ts
+│   │   │   └── query
+│   │   │       └── QueryBuilder.ts
 │   │   └── utils
 │   │       ├── jwt
 │   │       │   ├── jwt.ts
@@ -134,6 +143,7 @@ server
 │   │       ├── catchAsync.ts
 │   │       ├── generateOtp.ts
 │   │       ├── sanitizeUser.ts
+│   │       ├── seedSuperAdmin.ts
 │   │       ├── sendEmail.ts
 │   │       └── sendResponse.ts
 │   ├── types
@@ -142,6 +152,7 @@ server
 │   └── server.ts
 ├── .env.example
 ├── .gitignore
+├── Backend Boilerplate Public.postman_collection.json
 ├── README.md
 ├── bun.lock
 ├── eslint.config.mjs

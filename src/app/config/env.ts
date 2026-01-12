@@ -31,6 +31,8 @@ const envSchema = z.object({
   REDIS_USERNAME: z.string(),
   REDIS_PASSWORD: z.string(),
   OTP_EXPIRATION: z.coerce.number().min(2),
+  SUPER_ADMIN_EMAIL: z.string(),
+  SUPER_ADMIN_PASS: z.string(),
 });
 
 const env = envSchema.safeParse(process.env);

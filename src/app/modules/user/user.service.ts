@@ -1,12 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Prisma } from "@prisma/client";
 import { Provider } from "@prisma/enums";
 import envVars from "app/config/env";
 import ApiError from "app/errors/ApiError";
 import { prisma } from "app/lib/prisma";
+import { pagination } from "app/shared/pagination/pagination";
 import { sanitizeUser } from "app/utils/sanitizeUser";
 import bcrypt from "bcryptjs";
 import { StatusCodes } from "http-status-codes";
 import { JwtPayload } from "jsonwebtoken";
+import { UserRepository } from "./user.repository";
 const setPassword = async (userId: string, payload: JwtPayload) => {
   const user = await prisma.user.findUnique({
     where: {
@@ -64,6 +67,16 @@ const getMe = async (userId: string) => {
   return sanitizeUser(user as Prisma.UserCreateInput);
 };
 
+/** Get all users by Admin and Super Admin */
+const getAllUsers = async (query: any) => {
+  const { users, total } = await UserRepository.findManyUser(query);
+  const paginate = await pagination(query, total);
+
+  return {
+    meta: paginate,
+    data: users,
+  };
+};
 // Profile Update
 
 const updateProfile = async (
@@ -92,4 +105,5 @@ export const UserServices = {
   setPassword,
   getMe,
   updateProfile,
+  getAllUsers,
 };

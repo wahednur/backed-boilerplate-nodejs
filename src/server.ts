@@ -3,6 +3,7 @@ import { Server } from "http";
 import app from "./app";
 
 import { connectRedis } from "app/config/redies.config";
+import { seeSeedSuperAdmin } from "app/utils/seedSuperAdmin";
 import envVars from "./app/config/env";
 import { prisma } from "./app/lib/prisma";
 
@@ -27,6 +28,7 @@ const bootstrap = async () => {
 (async () => {
   await connectRedis();
   await bootstrap();
+  await seeSeedSuperAdmin();
 })();
 
 // Graceful shutdown
