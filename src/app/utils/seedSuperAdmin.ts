@@ -4,6 +4,7 @@ import { Provider, UserRole, UserStatus } from "@prisma/enums";
 import envVars from "app/config/env";
 import { prisma } from "app/lib/prisma";
 import bcrypt from "bcryptjs";
+import { sanitizeUser } from "./sanitizeUser";
 
 export const seeSeedSuperAdmin = async () => {
   try {
@@ -44,7 +45,7 @@ export const seeSeedSuperAdmin = async () => {
       },
     });
     console.log("Super Admin created successfully \n");
-    console.log(createSuperUser);
+    console.log(sanitizeUser(createSuperUser));
   } catch (error) {
     console.log(error);
   }

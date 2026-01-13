@@ -101,9 +101,62 @@ const updateProfile = async (
   return result;
 };
 
+// Update Address
+const updateAddress = async (
+  userId: string,
+  payload: Partial<Prisma.AddressCreateInput>
+) => {
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+  });
+
+  if (!user) {
+    throw new ApiError(StatusCodes.NOT_FOUND, "User not found");
+  }
+
+  if (!payload.addressType || !payload.label) {
+    throw new ApiError(
+      StatusCodes.BAD_REQUEST,
+      "addressType and label are required"
+    );
+  }
+
+  return prisma.address.upsert({
+    where: {
+      userId_addressType_label: {
+        userId,
+        addressType: payload.addressType,
+        label: payload.label,
+      },
+    },
+    update: {
+      line1: payload.line1,
+      line2: payload.line2,
+      country: payload.country,
+      state: payload.state,
+      city: payload.city,
+      postCode: payload.postCode, // ✅ guaranteed
+      isPrimary: true,
+    },
+    create: {
+      line1: payload.line1 as string,
+      line2: payload.line2,
+      country: payload.country as string,
+      state: payload.state as string,
+      city: payload.city as string,
+      postCode: payload.postCode as string, // ✅ required
+      userId,
+      isPrimary: true,
+      addressType: payload.addressType,
+      label: payload.label,
+    },
+  });
+};
+
 export const UserServices = {
   setPassword,
   getMe,
   updateProfile,
   getAllUsers,
+  updateAddress,
 };

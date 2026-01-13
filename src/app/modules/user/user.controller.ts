@@ -47,7 +47,7 @@ const getMe = catchAsync(
   }
 );
 
-/** Get all users */
+/** Get all users by super admin and admin */
 const getAllUsers = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -88,9 +88,30 @@ const updateProfile = catchAsync(
   }
 );
 
+const updateAddress = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const decodedToken = req.user as JwtPayload;
+      const payload = req.body;
+      const result = await UserServices.updateAddress(
+        decodedToken.userId,
+        payload
+      );
+      sendResponse(res, {
+        success: true,
+        statusCode: StatusCodes.OK,
+        message: "Profile data updated successfully",
+        data: result,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+);
 export const UserControllers = {
+  getAllUsers,
   setPassword,
   getMe,
   updateProfile,
-  getAllUsers,
+  updateAddress,
 };

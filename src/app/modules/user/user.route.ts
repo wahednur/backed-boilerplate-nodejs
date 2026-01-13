@@ -6,15 +6,14 @@ import { UserControllers } from "./user.controller";
 const router = Router();
 
 //Get current user
+router.get(
+  "/list",
+  checkAuth(UserRole.SUPER_ADMIN, UserRole.SUPER_ADMIN),
+  UserControllers.getAllUsers
+);
 router.get("/me", checkAuth(...Object.values(UserRole)), UserControllers.getMe);
 
 // get all user by Admin
-
-router.get(
-  "/users",
-  checkAuth(UserRole.SUPER_ADMIN, UserRole.ADMIN),
-  UserControllers.getAllUsers
-);
 
 //Update user profile
 // router.post("/profile");
@@ -27,6 +26,11 @@ router.patch(
   "/update",
   checkAuth(...Object.values(UserRole)),
   UserControllers.updateProfile
+);
+router.patch(
+  "/update-add",
+  checkAuth(...Object.values(UserRole)),
+  UserControllers.updateAddress
 );
 
 export const UserRoutes = router;
