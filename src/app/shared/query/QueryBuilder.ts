@@ -20,7 +20,7 @@ export class QueryBuilder {
     this.config = config;
   }
   static from(query: Record<string, unknown>, config: QueryConfig) {
-    return new QueryBuilder(query, config).build();
+    return new QueryBuilder(query ?? {}, config).build();
   }
 
   /** Global & generic */
